@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginFormController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#cd8fc4" height="400.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
+        <Label layoutX="58.0" layoutY="14.0" text="Trade Depot" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="30.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="78.0" layoutY="369.0" text="tradeDepot@gmail.com" textFill="WHITE" />
+        <Label layoutX="398.0" layoutY="80.0" text="Login" textFill="#8727c3">
+            <font>
+                <Font name="System Bold" size="30.0" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="txtLEmail" layoutX="377.0" layoutY="144.0" promptText="Email" />
+        <JFXPasswordField fx:id="txtPassword" layoutX="377.0" layoutY="189.0" promptText="Password" />
+        <JFXButton layoutX="397.0" layoutY="306.0" onAction="#btnLoginAction" prefHeight="35.0" prefWidth="96.0" style="-fx-background-color: #9b59b6;" text="Login" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </JFXButton>
+      <ImageView fitHeight="203.0" fitWidth="220.0" layoutX="47.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tradecenter.jpg" />
+         </image>
+      </ImageView>
+      <Hyperlink layoutX="496.0" layoutY="259.0" onAction="#hyperRegisterOnAction" text="Register" textFill="#51054e" />
+      <Label layoutX="363.0" layoutY="263.0" text="Don't you have  an account?">
+         <font>
+            <Font name="System Bold Italic" size="10.0" />
+         </font></Label>
+
+    </children>
+</AnchorPane>

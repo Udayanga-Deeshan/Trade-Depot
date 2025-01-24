@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import model.User;
+import org.jasypt.util.text.BasicTextEncryptor;
 
 import java.sql.*;
 
@@ -28,10 +29,19 @@ public class RegisterFormController {
 
 
     public void btnRegisterOnAction(ActionEvent actionEvent) throws SQLException {
+        String key ="#345891AG";
+
+        BasicTextEncryptor basicTextEncryptor = new BasicTextEncryptor();
+        basicTextEncryptor.setPassword(key);
+
         String username = txtUserName.getText();
         String email = txtEmail.getText();
         String password = txtPassword.getText();
         String confirmPassword =txtConfirmPassword.getText();
+
+
+
+
 
         if(password.equals(confirmPassword)){
 
@@ -39,12 +49,13 @@ public class RegisterFormController {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM users WHERE email =" + "'" + txtEmail.getText() + "'");
             if(!resultSet.next()){
+
                 User user = new User(username, email, password);
                 String SQL ="INSERT INTO users(username,email,password) VALUES(?,?,?)";
                 PreparedStatement preparedStatement= connection.prepareStatement(SQL);
                 preparedStatement.setString(1,user.getUserName());
                 preparedStatement.setString(2,user.getEmail());
-                preparedStatement.setString(3,user.getPassword());
+                preparedStatement.setString(3,basicTextEncryptor.encrypt(user.getPassword()));
                 preparedStatement.executeUpdate();
 
                 new Alert(Alert.AlertType.CONFIRMATION,"User added success").show();
