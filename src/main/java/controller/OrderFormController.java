@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import controller.customer.CustomerController;
+import controller.item.ItemController;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
 import model.Customer;
+import model.Item;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -48,6 +50,7 @@ public class OrderFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setDateAndTime();
         loadCustomerIds();
+        loadItemCodes();
 
         cmbCustomerId.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if(newValue!= null){
@@ -56,6 +59,25 @@ public class OrderFormController implements Initializable {
             }
 
         });
+
+        cmbItemCode.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if(newValue !=null){
+                searchItemData(newValue.toString());
+            }
+        });
+    }
+
+    private void loadItemCodes() {
+        cmbItemCode.setItems(new ItemController().getItemCodes());
+    }
+
+    private void searchItemData(String code) {
+        Item item = new ItemController().searchItem(code);
+
+        txtDiscription.setText(item.getDescription());
+        txtStock.setText(item.getStock().toString());
+        txtUnitPrice.setText(item.getUnitPrice().toString());
+
     }
 
     private void setDateAndTime(){
@@ -96,6 +118,8 @@ public class OrderFormController implements Initializable {
 
 
     public void btnAddToCartAction(ActionEvent actionEvent) {
+        List<Item> allItems = new ItemController().getALl();
+        System.out.println(allItems);
 
     }
 
