@@ -15,7 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
+import model.CartTM;
 import model.Customer;
 import model.Item;
 
@@ -48,6 +50,11 @@ public class OrderFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        colDiscription.setCellValueFactory(new  PropertyValueFactory<>("description"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qtyOnHand"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
         setDateAndTime();
         loadCustomerIds();
         loadItemCodes();
@@ -117,9 +124,21 @@ public class OrderFormController implements Initializable {
 
 
 
+    ObservableList<CartTM> cartItems = FXCollections.observableArrayList();
     public void btnAddToCartAction(ActionEvent actionEvent) {
-        List<Item> allItems = new ItemController().getALl();
-        System.out.println(allItems);
+        String itemCode = cmbItemCode.getValue().toString();
+        String description = txtDiscription.getText();
+        Integer qtyOnHand = Integer.parseInt(txtQty.getText());
+        Double unitPrice = Double.parseDouble(txtUnitPrice.getText());
+        Double total = unitPrice * qtyOnHand;
+
+
+        cartItems.add(new CartTM(itemCode,description,qtyOnHand,unitPrice,total));
+
+        tbCart.setItems(cartItems);
+
+        ;
+
 
     }
 
