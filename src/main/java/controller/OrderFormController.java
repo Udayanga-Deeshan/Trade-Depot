@@ -136,10 +136,19 @@ public class OrderFormController implements Initializable {
         cartItems.add(new CartTM(itemCode,description,qtyOnHand,unitPrice,total));
 
         tbCart.setItems(cartItems);
+        calcNetTotal();
 
         ;
 
 
+    }
+
+    private void calcNetTotal(){
+        Double netTotal =0.0;
+        for (CartTM cartTM: cartItems){
+            netTotal+=cartTM.getTotalPrice();
+        }
+        lblNetTotal.setText(netTotal.toString());
     }
 
     public void btnPlaceOrderAction(ActionEvent actionEvent) {
