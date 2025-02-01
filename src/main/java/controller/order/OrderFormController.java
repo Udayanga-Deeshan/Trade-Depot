@@ -1,4 +1,4 @@
-package controller;
+package controller.order;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -23,10 +23,8 @@ import model.Item;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class OrderFormController implements Initializable {
