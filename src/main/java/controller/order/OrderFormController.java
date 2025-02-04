@@ -11,20 +11,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
-import model.CartTM;
-import model.Customer;
-import model.Item;
+import model.*;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class OrderFormController implements Initializable {
@@ -45,6 +42,7 @@ public class OrderFormController implements Initializable {
     public TableColumn colQty;
     public TableColumn colUnitPrice;
     public TableColumn colTotal;
+    public JFXTextField txtOrderId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,7 +87,7 @@ public class OrderFormController implements Initializable {
         Date date =new Date();
         System.out.println(date);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dateFormat.format(date);
         System.out.println(formattedDate);
 
@@ -150,6 +148,36 @@ public class OrderFormController implements Initializable {
     }
 
     public void btnPlaceOrderAction(ActionEvent actionEvent) {
+
+        String orderId =txtOrderId.getText();
+            String date=lblDate.getText();
+            String customerId= cmbCustomerId.getValue().toString();
+
+        List<OrderDetail> orderDetails = new ArrayList<>();
+           cartItems.forEach(cartTM ->{
+              orderDetails.add(
+                      new OrderDetail(
+                              orderId,
+                              cartTM.getItemCode(),
+                              cartTM.getQtyOnHand(),
+                              cartTM.getUnitPrice()
+                      )
+              ) ;
+           });
+
+        Order order = new Order(orderId, date, customerId, orderDetails);
+
+        boolean isOrderPlaced = new OrderController().placeOrder(order);
+
+
+        if(isOrderPlaced){
+
+            new Alert(Alert.AlertType.INFORMATION,"Order Placed").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Order not Placed").show();
+        }
+
+
     }
 
 

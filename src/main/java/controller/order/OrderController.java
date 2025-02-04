@@ -22,6 +22,10 @@ public class OrderController {
 
             Boolean isOrderAdd = preparedStatement.executeUpdate() >0;
             if(isOrderAdd){
+                boolean isOrderDetailAdd = new OrderDetailController().addOrderDetail(order.getOrderDetailList());
+                if(isOrderDetailAdd){
+
+                }
 
             }
 
