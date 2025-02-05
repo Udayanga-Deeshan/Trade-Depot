@@ -78,7 +78,7 @@ public class ItemController implements  ItemService{
     public  boolean updateStock(List<OrderDetail>orderDetails){
         for(OrderDetail orderDetail:orderDetails){
             boolean isUpdateStock = updateStock(orderDetail);
-            if(isUpdateStock){
+            if(!isUpdateStock){
                 return false;
             }
         }
@@ -87,7 +87,7 @@ public class ItemController implements  ItemService{
     }
 
     public boolean updateStock(OrderDetail orderDetail){
-        String SQL="UPDATE item SET qtyOnHand=qtyOnHand-? WHERE code=? ";
+        String SQL="UPDATE item SET qtyOnHand = qtyOnHand -? WHERE code=? ";
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);

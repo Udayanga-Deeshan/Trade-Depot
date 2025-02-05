@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import controller.customer.CustomerController;
 import controller.item.ItemController;
+import db.DBConnection;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,6 +18,8 @@ import javafx.util.Duration;
 import model.*;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -167,18 +170,29 @@ public class OrderFormController implements Initializable {
 
         Order order = new Order(orderId, date, customerId, orderDetails);
 
-        boolean isOrderPlaced = new OrderController().placeOrder(order);
 
-
-        if(isOrderPlaced){
-
-            new Alert(Alert.AlertType.INFORMATION,"Order Placed").show();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Order not Placed").show();
+        try {
+            boolean isOrderPlaced  = new OrderController().placeOrder(order);
+            if(isOrderPlaced){
+                new Alert(Alert.AlertType.INFORMATION,"Order Placed").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Order not Placed").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
+
+
 
 
     }
 
 
+    public void btnCommitOnAction(ActionEvent actionEvent) throws  SQLException {
+
+            Connection connection = DBConnection.getInstance().getConnection();
+            connection.commit();
+
+    }
 }

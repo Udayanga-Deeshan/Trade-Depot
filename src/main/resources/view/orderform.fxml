@@ -53,5 +53,10 @@
             </font>
         </Label>
       <JFXTextField fx:id="txtOrderId" focusColor="#cbced7" layoutX="438.0" layoutY="25.0" promptText="Order ID" style="-fx-background-color: white;" />
+      <Button layoutX="317.0" layoutY="361.0" mnemonicParsing="false" onAction="#btnCommitOnAction" style="-fx-background-color: #9b59b6;" text="Commit" textFill="#eee2e2">
+         <font>
+            <Font name="System Bold Italic" size="15.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>
