@@ -1,14 +1,20 @@
 package controller.item;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Item;
 
+import java.util.List;
+
 public class ItemFormController {
+    public TableView tbItems;
     @FXML
     private TableColumn colCode;
 
@@ -21,8 +27,7 @@ public class ItemFormController {
     @FXML
     private TableColumn colUnitPrice;
 
-    @FXML
-    private TableView tbCustomers;
+
 
     @FXML
     private TextField txtCode;
@@ -76,5 +81,19 @@ public class ItemFormController {
     }
 
     public void btnReloadItemsOnAction(ActionEvent actionEvent) {
+        loadItemsTable();
+    }
+
+    private void loadItemsTable(){
+        colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        ObservableList<Item> itemObservableList = FXCollections.observableArrayList();
+        List<Item>itemList =new ItemController().getALl();
+        itemList.forEach(item->{
+            itemObservableList.add(item);
+        });
+        tbItems.setItems(itemObservableList);
     }
 }
