@@ -80,10 +80,44 @@ public class CustomerFormController {
     @FXML
     void btnSearchCustomerAction(ActionEvent event) {
 
+            if(txtID.getText().trim().isEmpty()){
+                new Alert(Alert.AlertType.ERROR,"Please Provide customer id").show();
+            }else{
+                Customer searchedCustomer=new CustomerController().searchCustomer(txtID.getText());
+                txtName.setText(searchedCustomer.getName());
+                txtAddress.setText(searchedCustomer.getAddress());
+                txtSalary.setText(String.valueOf(searchedCustomer.getSalary()));
+            }
+
+
+
+
+
     }
 
     @FXML
     void btnUpdateCustomerAction(ActionEvent event) {
+
+
+        boolean isUpdateCustomer= new CustomerController().updateCustomer(
+                new Customer(
+                        txtID.getText(),
+                        txtName.getText(),
+                        txtAddress.getText(),
+                        Double.parseDouble(txtSalary.getText())
+                )
+        );
+
+        if(isUpdateCustomer){
+            new Alert(Alert.AlertType.INFORMATION,"Customer Updated Succesfully").show();
+            txtID.clear();
+            txtName.clear();
+            txtAddress.clear();
+            txtSalary.clear();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"operation failed").show();
+        }
+
 
     }
 

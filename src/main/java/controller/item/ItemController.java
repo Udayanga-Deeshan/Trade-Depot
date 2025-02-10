@@ -3,6 +3,7 @@ package controller.item;
 import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import model.Item;
 import model.OrderDetail;
 
@@ -14,14 +15,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemController implements  ItemService{
+
+
     @Override
     public boolean addItem(Item item) {
-        return false;
+        String SQL= "INSERT INTO item VALUES(?,?,?,?)";
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement=connection.prepareStatement(SQL);
+            preparedStatement.setObject(1,item.getCode());
+            preparedStatement.setObject(2,item.getDescription());
+            preparedStatement.setObject(3,item.getUnitPrice());
+            preparedStatement.setObject(4,item.getStock());
+            return  preparedStatement.executeUpdate() >0;
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public boolean updateItem(Item item) {
-        return false;
+        String SQL="UPDATE item SET description=?, unitprice=? qtyOnhand=? WHERE code=?";
+        try {
+            Connection connection= DBConnection.getInstance().getConnection();
+            PreparedStatement preparedStatement= connection.prepareStatement(SQL);
+            preparedStatement.setObject(1,item.getDescription());
+            preparedStatement.setObject(2,item.getUnitPrice());
+            preparedStatement.setObject(3,item.getStock());
+            preparedStatement.setObject(4,item.getCode());
+
+           return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
@@ -99,4 +128,6 @@ public class ItemController implements  ItemService{
             throw new RuntimeException(e);
         }
     }
+
+
 }
