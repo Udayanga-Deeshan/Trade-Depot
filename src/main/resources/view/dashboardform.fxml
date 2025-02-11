@@ -2,25 +2,26 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardFormCOntroller">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#10375b" height="400.0" stroke="BLACK" strokeType="INSIDE" width="216.0" />
-      <JFXButton layoutX="39.0" layoutY="96.0" onAction="#btnCustomerFormOnAction" style="-fx-background-color: #95a5a6;" text="Customer Form" textFill="#eee8e8">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#833779" height="400.0" stroke="BLACK" strokeType="INSIDE" width="216.0" />
+      <JFXButton layoutX="39.0" layoutY="96.0" onAction="#btnCustomerFormOnAction" style="-fx-background-color: #ecf0f1;" text="Customer Form" textFill="#111010">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="39.0" layoutY="183.0" onAction="#btnItemFormOnAction" prefHeight="35.0" prefWidth="138.0" style="-fx-background-color: #95a5a6;" text="Item Form" textFill="#eee8e8">
+      <JFXButton layoutX="39.0" layoutY="183.0" onAction="#btnItemFormOnAction" prefHeight="35.0" prefWidth="138.0" style="-fx-background-color: #ecf0f1;" text="Item Form" textFill="#141313">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="39.0" layoutY="258.0" onAction="#btnOrderFormOnAction" prefHeight="35.0" prefWidth="138.0" style="-fx-background-color: #95a5a6;" text="Order Form" textFill="#eee8e8">
+      <JFXButton layoutX="39.0" layoutY="258.0" onAction="#btnOrderFormOnAction" prefHeight="35.0" prefWidth="138.0" style="-fx-background-color: #ecf0f1;" text="Order Form" textFill="#393737">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -30,8 +31,15 @@
             <Font name="System Bold Italic" size="20.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="loadFormContent" layoutX="217.0" layoutY="-2.0" prefHeight="400.0" prefWidth="565.0" />
-      <JFXButton layoutX="39.0" layoutY="336.0" onAction="#btnRegisterUserOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #95a5a6;" text="Register New User" textFill="#eee8e8">
+      <AnchorPane fx:id="loadFormContent" layoutX="217.0" layoutY="-2.0" prefHeight="400.0" prefWidth="565.0">
+         <children>
+            <ImageView fitHeight="355.0" fitWidth="378.0" layoutX="111.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/SuperMarket-logo.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <JFXButton layoutX="39.0" layoutY="336.0" onAction="#btnRegisterUserOnAction" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: #ecf0f1;" text="Register New User" textFill="#252323">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
